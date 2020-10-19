@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.4/jquery.js"></script>
+</head>
+
+<body>
+    <form action="###">
+        请输入要查询的数据
+        <input type="text" name='userID' id="user">
+        </br>
+        <button id="btn">查询</button>
+    </form>
+    <script>
+        $(function () {
+            $("form").submit(function () {
+
+                // $.ajax({
+                //     type: "post",
+                //     url: "/userinfo",
+                //     headers:{
+                //         "Content-Type":"application/json;charset=utf-8"
+                //     },
+
+                //     /* data:{
+                //         userID:$("#user").val()
+                //     }, */
+                //     data:JSON.stringify({
+                //         userID:$("#user").val()
+                //     }),
+                //     success(data) {
+                //         console.log(data);
+                //     },
+                //     error(err) {
+                //         console.log(err);
+                //     }
+                // })
+
+
+                // $.ajax({
+                //     type: "post",
+                //     url: "/userinfo",
+                //     // data: `userid=${$("#user").val()}`,
+                //     headers: {
+                //         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+                //         // "Content-Type": "application/json;charset=utf-8"
+                //     },
+                //     data: {
+                //         userid: $("#user").val()
+                //     },
+                //     /* data: JSON.stringify({
+                //         userid: $("#user").val()
+                //     }), */
+                //     success(data) {
+                //         console.log(data);
+                //     },
+                //     error(err) {
+                //         console.log(err);
+                //     }
+                // })
+
+                $.get("/userinfo", {
+                    name: "小佳佳",
+                    age: 18,
+                }, function (data) {
+                    console.log(data);
+                })
+
+                $.post("/userinfo",{
+                    name:"哈哈哈",
+                    sex:"女"    
+                },function(data){
+                    console.log(data);
+                })
+
+                return false;
+            })
+
+        })
+
+    </script>
+</body>
+
+</html>

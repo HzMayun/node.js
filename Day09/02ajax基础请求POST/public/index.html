@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="###">
+        请输入要查询的数据
+        <input type="text" name='userID' id="user">
+        </br>
+        <button id="btn">查询</button>
+    </form>
+    <script>
+        const oBtn = document.querySelector("#btn")
+        const oForm = document.querySelector("form")
+        const oUser = document.querySelector("#user")
+
+        oForm.onsubmit = function () {
+            console.log("发送ajax请求···");
+            
+            //1、ajax请求以来XMLHttpRequest对象，需要实例化这个对象
+            const xhr = new XMLHttpRequest();
+            console.log(xhr.readyState); //打印状态码
+            //打开路径，建立连接，
+            xhr.open("GET", `/userinfo?userID=${oUser.value}`, true);
+            console.log(xhr.readyState); //打印状态码
+            //使用send方法，如果是get请求，则请求的数据放在url上，如果是post请求，则请求数据放在send中
+            xhr.send();//发送请求
+            xhr.onreadystatechange = function () {
+                console.log(xhr.readyState); //打印状态码
+                if (xhr.readyState === 4 && (xhr.status > 199 && xhr.status < 300)) {
+                    console.log("请求成功，数据接收成功");
+                    console.log(JSON.parse(xhr.responseText));
+                }
+            }
+            return false;
+
+        }
+
+        oForm.onsubmit = function () {
+            console.log("发送ajax请求···");
+            
+            //1、ajax请求以来XMLHttpRequest对象，需要实例化这个对象
+            const xhr = new XMLHttpRequest();
+
+            //打开路径，建立连接，
+            xhr.open("POST", `/userinfo`, true);
+            //post请求要设置请求头
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8")
+
+            //使用send方法，如果是get请求，则请求的数据放在url上，如果是post请求，则请求数据放在send中
+            xhr.send(`userID=${oUser.value}`);//发送请求
+            // console.log(`userID=${oUser.value}`);
+            /* xhr.send(JSON.stringify({
+                userid: oUser.value,
+                pass: 123
+            })) */
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && (xhr.status > 199 && xhr.status < 300)) {
+                    console.log("请求成功，数据接收成功");
+                    console.log(JSON.parse(xhr.responseText));
+                }
+            }
+            return false;
+        }
+    </script>
+</body>
+
+</html>

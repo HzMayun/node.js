@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const obj = {
+            name:"小王",
+            sex:"男",
+            age:18,
+            hobby:{
+                one:"写代码",
+                two:"洗头发"
+            },
+            score:[100,90,80],
+            do(){
+                console.log("不做人事儿");
+            }
+        }
+//浅拷贝只是把obj的地址拿过来用，当obj对象的值改变了之后，拷贝的内容也会跟着改变了
+        const obj1 = Object.assign({},obj)
+        console.log(obj1);
+        obj.hobby.one = "搓脚"
+        console.log(obj);
+
+
+        
+    </script>
+</body>
+</html>

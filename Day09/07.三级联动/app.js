@@ -15,7 +15,7 @@ db.then(() => {
 				name: 1,
 				_id: 0
 			})
-			console.log(cities);
+			// console.log(cities);
 
 			//响应数据
 			res.json({
@@ -37,13 +37,13 @@ db.then(() => {
 			const {
 				province
 			} = req.query;
-			console.log(province)
+			// console.log(province)
 
 			const a = await Cities.find({
 				name : province,
 			})
 			const ctPro = a[0].province
-			console.log(ctPro);
+			// console.log(ctPro);
 
 			
 
@@ -54,7 +54,7 @@ db.then(() => {
 				name: 1,
 				_id: 0
 			})
-			console.log(cities);
+			// console.log(cities);
 
 			//响应数据
 			res.json({
@@ -76,25 +76,30 @@ db.then(() => {
 				province,
 				city
 			} = req.query;
-			// console.log(province)
+			console.log(province,city)
+
+
 
 			const a = await Cities.find({
-				name : city,
+				name : province,
 			})
-			const ctPro = a[0].city
-			console.log(ctPro);
+			// console.log(a);
+			const ctPro = a[0].province  // 13
+			// console.log(ctPro);
 
+
+			const b = await Cities.find({
+				name :city,
+			})
+			const ctPct = b[0].city  // 13
+			console.log(ctPro,ctPct);
 
 			const cities = await Cities.find({
-				province,
-				city,
+				province:ctPro,
+				city:ctPct,
 				level: 3
-			}, {
-				name: 1,
-				_id: 0
 			})
 			console.log(cities);
-
 			//响应数据
 			res.json({
 				status: 0,

@@ -14,11 +14,7 @@
 
     <select id="city">
         <option>请选择市</option>
-        <option>请选择市</option>
-        <option>请选择市</option>
-        <option>请选择市</option>
-        <option>请选择市</option>
-        <option>请选择市</option>
+
 
     </select> 市
 
@@ -30,8 +26,6 @@
 
     <script type="text/javascript" src="./js/jquery-1.12.4.js"></script>
     <script type="text/javascript">
-        const oProvince = document.querySelector("#province")
-        const oCounty = document.querySelector("#county")
         //省份不需要向服务器的发送请求
         $.get("/province", function (cities) {
             cities.data.forEach((item, index) => {
@@ -39,49 +33,42 @@
                 //向页面插入元素
                 $("#province").append(`<option>${item.name}</option>`)
             })
-            // $("#city option").remove()
-            // $("#city").append(`<option>请选择市</option>`)
-            // $("#county option").remove()
-            // $("#county").append(`<option>请选择县</option>`)
         })
         //市区 需要拿到省份里面的value，根据数据库中 省份的 province ：value 区查询 市区
-        oProvince.onchange = function () {
+        $("#province").change(function () {
+            console.log(2222);
             $.get("/city",
                 { province: $("#province").val() },
                 function (cities) {
                     $("#city option").remove()
                     $("#city").append(`<option>请选择市</option>`)
-                    // $("#county option").remove()
-                    // $("#county").append(`<option>请选择县</option>`)
-                    cities.data.forEach((item, index) => {
-                        console.log(item.name); //拿到字符串
-                        // //先把页面全部清空
-                        // $("#city：not(first-chlid").append(`<option></option>`)
-                        // // 向页面插入元素
+                    $("#county option").remove()
+                    $("#county").append(`<option>请选择区/县</option>`)
 
+                    cities.data.forEach((item, index) => {
+                        // console.log(item.name); //拿到字符串
                         $("#city").append(`<option>${item.name}</option>`)
                     })
                 })
-        }
-        oCounty.onchange = function () {
-            $.get("/county",
-                { city: $("#city").val() },
-                function (cities) {
-                    $("#county option").remove()
-                    $("#county").append(`<option>请选择区/县</option>`)
-                    // $("#county option").remove()
-                    // $("#county").append(`<option>请选择县</option>`)
-                    cities.data.forEach((item, index) => {
-                        console.log(item.name); //拿到字符串
-                        // //先把页面全部清空
-                        // $("#city：not(first-chlid").append(`<option></option>`)
-                        // // 向页面插入元素
-
-                        $("#county").append(`<option>${item.name}</option>`)
+        })
+        $("#city").change(
+            function () {
+                $("#county option").remove()
+                $("#county").append(`<option>请选择区/县</option>`)
+                $.get("/county",
+                    {
+                        province: $("#province").val(),//province的ID
+                        city: $("#city").val(),     //cuty的ID
+                    },
+                    function (cities) {
+                        console.log(cities);
+                        cities.data.forEach((item, index) => {
+                            $("#county").append(`<option>${item.name}</option>`)
+                        })
                     })
-                })
-        }
+            }
 
+        )
 
     </script>
 </body>

@@ -1,0 +1,164 @@
+<!-- 
+    一、数组操作
+        1、栈操作 ：push（）、pop（） 方法    
+            push():在末尾加入一个或者多个参数，返回加入后的数组的长度
+            pop():删除数组的最后一个值，并返回
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        //pop()  push()
+        const arr = [];
+        console.log(arr.push("1", "2", "a", "s"));  // 4 push返回的时数组的长度
+        console.log(arr.pop());  // s 返回删除的值
+
+        var arr1 = [1, 2, 3, 4, 5, 6, 7, 8]
+        /* //splice()方法
+        
+        //一个参数
+        // console.log(arr1.splice());  // []  空数组
+        // console.log(arr1.splice(3));  // [4,5,6,7,8]   删除前三个
+        
+        // 两个参数
+        // console.log(arr1.splice(1,2));  // [2,3]   删除2，3  从下标为1的数，删除两个并返回
+        // console.log(arr1);  //[1, 4, 5, 6, 7, 8]
+
+        // 三个参数
+        // console.log(arr1.splice(2,3,"a"));//[3,4,5] ,从下标2的元素删除3个，然后把5插入后面
+        // console.log(arr1);//[1, 2, "a", 6, 7, 8]
+
+
+        //当第1个参数值大于length属性值时,被视为在数组尾部执行操作,因此删除无效,但是可以在尾部插入多个指定元素
+        // console.log(arr1.splice(13, 2, "a", 1)); // []
+        // console.log(arr1); //[1, 2, 3, 4, 5, 6, 7, 8, "a", 1]
+
+
+        //参数取负值问题。如果第1个参数为负值,则按绝对值从数组右侧开始向左侧定位。如果第2个参数为负值,则被视为0。
+        // console.log(arr1.splice(-2, 0, "a")); //[]
+        // console.log(arr1);// [1, 2, 3, 4, 5, 6, "a", 7, 8]  */
+
+
+
+        /* 
+        //slice方法 ：截取数组中的指定的区段的元素，并返回这个子数组。不会修改数组
+
+            两个参数 ：分别指定截取子数组的起始和结束位置下标
+            如果只有一个下标，则表示该下标到数组结束。
+            当参数为负数时，表示从右向左的顺序定位。但是取值仍然是第一个为起始，第二个为结束下标。如果起始下标值大于或等于结束下标值，则不执行操作
+
+
+
+            console.log(arr1.slice(3));//[4, 5, 6, 7, 8]
+            console.log(arr1.slice(3,5)); //[4,5]
+            console.log(arr1.slice(-3,6)); // [6]
+            console.log(arr1);//[1, 2, 3, 4, 5, 6, 7, 8]
+        */
+        /*
+             join()方法 ：把数组转换成字符串，可以指定分隔符，省略参数的时候，默认使用逗号，这时和toString()方法一样
+                 返回的时转换后的字符串，不改变原数组
+                 参数输入空字符串的时候，转换出来的字符串没有间隔
+                 null 和 undefined 直接转换成空字符，其他的安装toString规则转换
+ 
+             console.log(arr1.join(""));//12345678
+         */
+        /*
+             元素定位 indexOf() 和 lastIndexOf() 
+                 返回某个元素值在数组中第一次/最后一次 出现的 下标 
+                 没有这返回-1
+         */
+        /*
+             isArray 是Array类型的一个静态方法，可以判断一个值是不是猪猪。
+             Array.isArray();
+             使用in运算符可以检测某个值是否存在于数组中,注意,in运算符主要用于对象,但也适用于数组
+ 
+             console.log(Array.isArray(arr1)); //true
+             console.log(3 in arr1);//true
+ 
+         */
+        /* 
+            for/in for  forEach遍历
+
+                for/in会跳过空元素
+
+                const arr2 = ["a","s","d","f",,"e"]
+                for (var j in arr2) {
+                    console.log(j,arr2[j]);// 0 a   1 s   2 d  3 f   5 e
+                }
+        */
+        /* 
+             keys（）迭代，keys()是Object的静态函数,专门用来遍历对象获取键名, Object.keys函数的参数是一个对象,返回一个数组,元素是该对象所有本地属性名。
+        */
+
+        /* 
+               reduce（）方法
+               语法： arr.reduce(callback,[initialVlaue])
+               callback 中可以接受四个参数： 
+                   1、previousValue ：上一次调用的返回值，或者是提供的初始值initialVlaue
+                   2、currentVlaue：数组中当前被处理的元素
+                   3、index ： 当前元素在数组中的索引
+                   4、array ：当前数组
+               initialValue （作为第一次调用 callback 的第一个参数。）
+                
+
+               //没有对多维数组作出处理，只拆开了，没有拼上去
+               
+        */
+        const arrr = [1, 2, 3, 3, [1,2],[1,2],4, 1, 2, 4, 23, 4]
+                // let newArr = arrr.reduce((pre,cur)=>{
+                //     if(!pre.includes(cur)){
+                //         return pre.concat(cur)
+                //     }else{
+                //         return pre
+                //     }
+                // },[])
+                // console.log(newArr);  //  [1, 2, 3, 1, 2, 1, 2, 4, 23]
+                // [1,2,3,[1,2],4,23]
+                // [1,1] [1]
+                // [ 1 ,1,[1],[1]]     [1 ,[1]]
+
+
+
+
+
+
+
+
+                Array.prototype.unique = function(){
+                    let result = []
+                    const res1 =  this.filter((item,index) =>{
+
+                        if(item instanceof Array){
+                            const strArr =  JSON.stringify(item)
+                        if(!result.includes(strArr)){
+                            result.push(strArr)
+                        }
+                        }
+                        return  !(item instanceof Array) &&  this.indexOf(item) === index
+                        })
+
+                        const res2 = result.map(item => {
+                            return JSON.parse(item)
+                        })
+                       
+                        return res1.concat(res2)
+                    
+                }
+               const res=   arrr.unique()
+               console.log(res)
+    </script>
+
+
+
+
+</body>
+
+</html>

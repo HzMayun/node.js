@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div{
+            width: 100px;
+            height: 100px;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+    <div id='div'></div>
+    <script>
+        const oDiv = document.getElementById("div")
+
+//功能函数 
+        function move(){
+            console.log(Date.now());
+            console.log(this);
+        }
+
+        const result =throttle(move ,220)
+        oDiv.onmousemove = result ;
+
+        function throttle(fn,time){
+            let lastTime = 0
+            return function(){
+                //获取当前进入的时间
+                let nowTime  = Date.now();
+                if(nowTime-lastTime<time){
+                    return
+                }
+                //如果是假超出了 直接调用fn
+                fn.call(this,arguments[0])
+
+                lastTime  = nowTime;
+            }
+        }
+
+    </script>
+</body>
+</html>
